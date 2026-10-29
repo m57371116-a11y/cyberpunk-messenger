@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سایبر پانک — پیامرسان</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <!-- صفحه لاگین / ثبت‌نام -->
+  <div id="auth-screen" class="screen active">
+    <div class="auth-container">
+      <div class="auth-logo">
+        <!-- لوگوی هکری نئونی -->
+        <div class="logo-svg">
+          <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <!-- Outer hex ring -->
+            <polygon points="60,8 104,32 104,88 60,112 16,88 16,32" fill="none" stroke="#00f0ff" stroke-width="2" opacity="0.4"/>
+            <polygon points="60,16 96,36 96,84 60,104 24,84 24,36" fill="none" stroke="#ff00aa" stroke-width="1.5" opacity="0.5"/>
+            <!-- Skull base -->
+            <ellipse cx="60" cy="52" rx="28" ry="26" fill="#0a0a1a" stroke="#00f0ff" stroke-width="2"/>
+            <!-- Eyes (hacker terminals) -->
+            <rect x="42" y="42" width="12" height="10" rx="1" fill="#00f0ff" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.4;0.9" dur="2s" repeatCount="indefinite"/>
+            </rect>
+            <rect x="66" y="42" width="12" height="10" rx="1" fill="#ff00aa" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.5;0.9" dur="1.7s" repeatCount="indefinite"/>
+            </rect>
+            <!-- Terminal lines in eyes -->
+            <line x1="44" y1="45" x2="52" y2="45" stroke="#050510" stroke-width="1.2"/>
+            <line x1="44" y1="48" x2="50" y2="48" stroke="#050510" stroke-width="1.2"/>
+            <line x1="68" y1="45" x2="76" y2="45" stroke="#050510" stroke-width="1.2"/>
+            <line x1="68" y1="48" x2="74" y2="48" stroke="#050510" stroke-width="1.2"/>
+            <!-- Nose / circuit -->
+            <path d="M57 55 L60 62 L63 55" fill="none" stroke="#b400ff" stroke-width="1.5"/>
+            <!-- Jaw / teeth matrix -->
+            <path d="M40 65 Q60 78 80 65" fill="none" stroke="#00f0ff" stroke-width="2"/>
+            <line x1="48" y1="68" x2="48" y2="74" stroke="#00f0ff" stroke-width="1.5"/>
+            <line x1="55" y1="70" x2="55" y2="76" stroke="#00f0ff" stroke-width="1.5"/>
+            <line x1="60" y1="71" x2="60" y2="77" stroke="#ff00aa" stroke-width="1.5"/>
+            <line x1="65" y1="70" x2="65" y2="76" stroke="#00f0ff" stroke-width="1.5"/>
+            <line x1="72" y1="68" x2="72" y2="74" stroke="#00f0ff" stroke-width="1.5"/>
+            <!-- Circuit traces -->
+            <path d="M32 50 L20 50 L20 30 L40 18" fill="none" stroke="#00f0ff" stroke-width="1" opacity="0.6"/>
+            <path d="M88 50 L100 50 L100 30 L80 18" fill="none" stroke="#ff00aa" stroke-width="1" opacity="0.6"/>
+            <circle cx="20" cy="50" r="2" fill="#00f0ff"/>
+            <circle cx="100" cy="50" r="2" fill="#ff00aa"/>
+            <!-- Bottom code brackets -->
+            <text x="36" y="100" font-family="monospace" font-size="11" fill="#00f0ff" opacity="0.8">&lt;/&gt;</text>
+            <text x="68" y="100" font-family="monospace" font-size="9" fill="#ff00aa" opacity="0.7">0x</text>
+          </svg>
+        </div>
+        <h1>سایبر پانک</h1>
+        <p>پیامرسان ناشناس — نسخه دمو</p>
+      </div>
+
+      <div class="auth-tabs">
+        <button class="tab-btn active" data-tab="login">ورود</button>
+        <button class="tab-btn" data-tab="register">ثبت‌نام</button>
+      </div>
+
+      <!-- فرم ورود -->
+      <form id="login-form" class="auth-form active">
+        <div class="input-group">
+          <i class="fas fa-user"></i>
+          <input type="text" id="login-username" placeholder="نام کاربری" required autocomplete="username">
+        </div>
+        <div class="input-group">
+          <i class="fas fa-lock"></i>
+          <input type="password" id="login-password" placeholder="رمز عبور" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn-primary">ورود</button>
+        <p class="auth-hint">حساب دمو: <code>demo</code> / <code>1234</code></p>
+      </form>
+
+      <!-- فرم ثبت‌نام -->
+      <form id="register-form" class="auth-form">
+        <div class="input-group">
+          <i class="fas fa-user"></i>
+          <input type="text" id="reg-username" placeholder="نام کاربری" required minlength="3">
+        </div>
+        <div class="input-group">
+          <i class="fas fa-id-card"></i>
+          <input type="text" id="reg-name" placeholder="نام نمایشی" required>
+        </div>
+        <div class="input-group">
+          <i class="fas fa-lock"></i>
+          <input type="password" id="reg-password" placeholder="رمز عبور" required minlength="4">
+        </div>
+        <div class="input-group">
+          <i class="fas fa-lock"></i>
+          <input type="password" id="reg-password2" placeholder="تکرار رمز عبور" required>
+        </div>
+        <button type="submit" class="btn-primary">ایجاد حساب</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- صفحه اصلی پیامرسان -->
+  <div id="app-screen" class="screen">
+    <!-- سایدبار چپ -->
+    <aside class="sidebar">
+      <header class="sidebar-header">
+        <div class="user-brief" id="current-user-brief">
+          <div class="avatar" id="sidebar-avatar">?</div>
+          <div class="user-info">
+            <span class="name" id="sidebar-name">کاربر</span>
+            <span class="status online">آنلاین</span>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button class="icon-btn" id="btn-profile" title="پروفایل"><i class="fas fa-user-cog"></i></button>
+          <button class="icon-btn" id="btn-logout" title="خروج"><i class="fas fa-sign-out-alt"></i></button>
+        </div>
+      </header>
+
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="search-chats" placeholder="جستجو در چت‌ها...">
+      </div>
+
+      <div class="sidebar-tabs">
+        <button class="side-tab active" data-filter="all">همه</button>
+        <button class="side-tab" data-filter="private">خصوصی</button>
+        <button class="side-tab" data-filter="group">گروه‌ها</button>
+        <button class="side-tab" data-filter="channel">کانال‌ها</button>
+        <button class="side-tab" data-filter="users">کاربران</button>
+      </div>
+
+      <div class="chat-list" id="chat-list">
+        <!-- چت‌ها اینجا رندر می‌شوند -->
+      </div>
+      <div class="users-list" id="users-list" style="display:none;">
+        <!-- کاربران اینجا رندر می‌شوند -->
+      </div>
+
+      <div class="fab-container">
+        <button class="fab" id="btn-new" title="جدید">
+          <i class="fas fa-pen"></i>
+        </button>
+        <div class="fab-menu" id="fab-menu">
+          <button data-action="private"><i class="fas fa-user"></i> چت خصوصی</button>
+          <button data-action="group"><i class="fas fa-users"></i> ساخت گروه</button>
+          <button data-action="channel"><i class="fas fa-bullhorn"></i> ساخت کانال</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ناحیه چت -->
+    <main class="chat-area">
+      <!-- حالت خالی -->
+      <div class="empty-state" id="empty-state">
+        <i class="fas fa-comments"></i>
+        <h2>یک گفتگو انتخاب کنید</h2>
+        <p>از لیست سمت راست یک چت را باز کنید یا گفتگوی جدید بسازید</p>
+      </div>
+
+      <!-- پنجره چت فعال -->
+      <div class="chat-window" id="chat-window" style="display:none;">
+        <header class="chat-header">
+          <button class="icon-btn mobile-only" id="btn-back"><i class="fas fa-arrow-right"></i></button>
+          <div class="chat-info">
+            <div class="avatar" id="chat-avatar">?</div>
+            <div>
+              <h3 id="chat-title">عنوان</h3>
+              <span id="chat-subtitle">وضعیت</span>
+            </div>
+          </div>
+          <div class="chat-actions">
+            <button class="icon-btn" id="btn-select-mode" title="انتخاب چند پیام"><i class="fas fa-check-double"></i></button>
+            <button class="icon-btn" id="btn-chat-info" title="اطلاعات"><i class="fas fa-info-circle"></i></button>
+          </div>
+        </header>
+
+        <!-- نوار انتخاب چندتایی -->
+        <div class="selection-bar" id="selection-bar" style="display:none;">
+          <button class="icon-btn" id="btn-cancel-select" title="لغو"><i class="fas fa-times"></i></button>
+          <span id="selection-count">۰ انتخاب‌شده</span>
+          <div class="selection-actions">
+            <button class="sel-btn" id="btn-bulk-delete-me" title="حذف برای من"><i class="fas fa-eye-slash"></i> برای من</button>
+            <button class="sel-btn danger" id="btn-bulk-delete-all" title="حذف برای همه"><i class="fas fa-trash"></i> برای همه</button>
+          </div>
+        </div>
+
+        <div class="messages" id="messages">
+          <!-- پیام‌ها -->
+        </div>
+
+        <!-- پیش‌نمایش فایل قبل از ارسال -->
+        <div class="file-preview" id="file-preview" style="display:none;">
+          <div class="file-preview-inner">
+            <img id="preview-img" style="display:none;" alt="preview">
+            <video id="preview-video" style="display:none;" controls></video>
+            <div id="preview-file-info" style="display:none;">
+              <i class="fas fa-file"></i>
+              <span id="preview-file-name"></span>
+              <span id="preview-file-size"></span>
+            </div>
+            <button class="icon-btn" id="btn-cancel-file" title="لغو"><i class="fas fa-times"></i></button>
+          </div>
+        </div>
+
+        <footer class="chat-input-area">
+          <input type="file" id="file-input" accept="image/*,video/*,.pdf,.zip,.doc,.docx,.xls,.xlsx,.txt,.mp3,.rar" hidden>
+          <button class="icon-btn" id="btn-attach" title="ارسال عکس / فیلم / فایل"><i class="fas fa-paperclip"></i></button>
+          <div class="input-wrapper">
+            <textarea id="message-input" placeholder="پیام خود را بنویسید..." rows="1"></textarea>
+          </div>
+          <button class="icon-btn send-btn" id="btn-send" title="ارسال"><i class="fas fa-paper-plane"></i></button>
+        </footer>
+      </div>
+    </main>
+  </div>
+
+  <!-- مودال‌ها -->
+  <!-- پروفایل -->
+  <div class="modal" id="modal-profile">
+    <div class="modal-content">
+      <header class="modal-header">
+        <h2>پروفایل من</h2>
+        <button class="icon-btn close-modal"><i class="fas fa-times"></i></button>
+      </header>
+      <div class="modal-body">
+        <div class="profile-avatar-section">
+          <div class="avatar large" id="profile-avatar">?</div>
+          <button class="btn-text" id="btn-change-avatar">تغییر آواتار</button>
+        </div>
+        <div class="input-group">
+          <label>نام نمایشی</label>
+          <input type="text" id="profile-name">
+        </div>
+        <div class="input-group">
+          <label>نام کاربری</label>
+          <input type="text" id="profile-username" disabled>
+        </div>
+        <div class="input-group">
+          <label>بیوگرافی</label>
+          <textarea id="profile-bio" rows="3" placeholder="چند کلمه درباره خودتان..."></textarea>
+        </div>
+        <button class="btn-primary" id="btn-save-profile">ذخیره تغییرات</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ساخت گروه / کانال / چت خصوصی -->
+  <div class="modal" id="modal-create">
+    <div class="modal-content">
+      <header class="modal-header">
+        <h2 id="create-modal-title">ساخت گروه</h2>
+        <button class="icon-btn close-modal"><i class="fas fa-times"></i></button>
+      </header>
+      <div class="modal-body">
+        <div class="input-group">
+          <label id="create-name-label">نام گروه</label>
+          <input type="text" id="create-name" placeholder="نام را وارد کنید">
+        </div>
+        <div class="input-group" id="create-desc-group">
+          <label>توضیحات (اختیاری)</label>
+          <textarea id="create-desc" rows="2" placeholder="توضیحات..."></textarea>
+        </div>
+        <div class="input-group" id="create-members-group">
+          <label>اعضا (نام کاربری با کاما جدا کنید)</label>
+          <input type="text" id="create-members" placeholder="user1, user2, ...">
+          <small class="hint">کاربران موجود: demo, alice, bob, charlie</small>
+        </div>
+        <button class="btn-primary" id="btn-create-confirm">ایجاد</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- اطلاعات چت -->
+  <div class="modal" id="modal-info">
+    <div class="modal-content">
+      <header class="modal-header">
+        <h2>اطلاعات</h2>
+        <button class="icon-btn close-modal"><i class="fas fa-times"></i></button>
+      </header>
+      <div class="modal-body" id="info-body">
+        <!-- محتوا دینامیک -->
+      </div>
+    </div>
+  </div>
+
+  <!-- پروفایل کاربر دیگر -->
+  <div class="modal" id="modal-user-profile">
+    <div class="modal-content">
+      <header class="modal-header">
+        <h2>پروفایل کاربر</h2>
+        <button class="icon-btn close-modal"><i class="fas fa-times"></i></button>
+      </header>
+      <div class="modal-body" id="user-profile-body">
+        <!-- محتوا دینامیک -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ویرایش پیام -->
+  <div class="modal" id="modal-edit-msg">
+    <div class="modal-content">
+      <header class="modal-header">
+        <h2>ویرایش پیام</h2>
+        <button class="icon-btn close-modal"><i class="fas fa-times"></i></button>
+      </header>
+      <div class="modal-body">
+        <div class="input-group">
+          <textarea id="edit-msg-text" rows="3" placeholder="متن جدید پیام..."></textarea>
+        </div>
+        <button class="btn-primary" id="btn-save-edit-msg">ذخیره</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- منوی راست‌کلیک پیام -->
+  <div id="msg-context-menu" class="context-menu">
+    <button data-action="edit"><i class="fas fa-pen"></i> ویرایش</button>
+    <button data-action="delete-me"><i class="fas fa-eye-slash"></i> حذف برای من</button>
+    <button data-action="delete-all"><i class="fas fa-trash"></i> حذف برای همه</button>
+  </div>
+
+  <!-- منوی چت (حذف چت) -->
+  <div id="chat-context-menu" class="context-menu">
+    <button data-action="delete-chat"><i class="fas fa-trash"></i> حذف گفتگو</button>
+  </div>
+
+  <!-- اعلان‌ها -->
+  <div id="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
